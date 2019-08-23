@@ -21,8 +21,6 @@ const pool = mysql.createPool({
 */
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
-    console.log(connection);
-
     if (err) {
         if (err.code === "PROTOCOL_CONNECTION_LOST") {
             console.error("Database connection was closed.");
@@ -31,8 +29,6 @@ pool.getConnection((err, connection) => {
             console.error("Database has too many connections.");
         }
         if (err.code === "ECONNREFUSED") {
-            console.log(err);
-
             console.error("Database connection was refused.");
         }
     }

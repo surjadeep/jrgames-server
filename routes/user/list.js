@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../../core/database");
+// const sql = require("../../core/sql");
 const router = express.Router();
 
 router.post("/list", async function(req, res, next) {
@@ -16,6 +17,8 @@ router.post("/list", async function(req, res, next) {
             "SELECT * FROM `users` WHERE users.auth_token <> '" +
             token +
             "' AND users.user_type <> '1'";
+        // const params = { auth_token: token, user_type: "1" };
+        // const result = await pool.query(sql.GET_USERS);
         const result = await pool.query(sql);
         if (result.length) {
             return res.send({ status: true, statusCode: 1015, result: result });
